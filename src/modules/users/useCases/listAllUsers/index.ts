@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import { UsersRepository } from "../../repositories/implementations/UsersRepository";
 import { ListAllUsersController } from "./ListAllUsersController";
 import { ListAllUsersUseCase } from "./ListAllUsersUseCase";

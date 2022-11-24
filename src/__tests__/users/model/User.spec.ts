@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { validate } from "uuid";
 
 import { User } from "../../../modules/users/model/User";

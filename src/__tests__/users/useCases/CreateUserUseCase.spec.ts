@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { UsersRepository } from "../../../modules/users/repositories/implementations/UsersRepository";
 import { CreateUserUseCase } from "../../../modules/users/useCases/createUser/CreateUserUseCase";
 

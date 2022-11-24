@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { v4 } from "uuid";
 
 import { UsersRepository } from "../../../modules/users/repositories/implementations/UsersRepository";
