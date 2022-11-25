@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 /* eslint-disable prettier/prettier */
 
 import { Request, Response } from "express";
@@ -8,19 +9,20 @@ class ListAllUsersController {
   constructor(private listAllUsersUseCase: ListAllUsersUseCase) { }
 
   handle(request: Request, response: Response): Response {
-    const { user_id } = request.query;
+    const { user_id: id } = request.headers;
 
-    const params = {
-      user_id: String(user_id)
+    try {
+      const users = this.listAllUsersUseCase.execute({ user_id: String(id) });
+
+      return response.status(200).json(users);
     }
-
-    const users = this.listAllUsersUseCase.execute(params);
-
-    if (!users) {
-      return response.status(400).json({ error: true });
+    catch (error) {
+      if (error === "Should not be able to a non existing user get list of all users") {
+        return response.status(404).json({ error });
+      } else {
+        return response.status(400).json({ error });
+      }
     }
-
-    return response.status(200).json({ body: users });
   }
 }
 

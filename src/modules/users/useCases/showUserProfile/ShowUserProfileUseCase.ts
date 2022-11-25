@@ -13,11 +13,8 @@ class ShowUserProfileUseCase {
   execute({ user_id }: IRequest): User {
     const user = this.usersRepository.findById(user_id);
 
-    console.log("ola", user_id);
-
-
     if (!user) {
-      return null;
+      throw new Error("User not found!")
     }
 
     return user;

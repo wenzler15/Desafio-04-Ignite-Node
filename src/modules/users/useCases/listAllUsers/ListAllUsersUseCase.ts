@@ -11,14 +11,16 @@ class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) { }
 
   execute({ user_id }: IRequest): User[] {
-    const user = this.usersRepository.findById(user_id);
+    const auth = this.usersRepository.findById(user_id);
 
-    if (!user) {
-      return null;
-    }
-
-    if (user.admin === false) {
-      throw Object.assign(new Error("User not admin!"), { statusCode: 400 }, { data: { error: true } });
+    if (!auth) {
+      throw new Error(`
+        Should not be able to a non existing user get list of all users
+      `);
+    } else if (auth.admin === false) {
+      throw new Error(`
+        Should not be able to a non admin user get list of all users
+      `);
     }
 
     const users = this.usersRepository.list();

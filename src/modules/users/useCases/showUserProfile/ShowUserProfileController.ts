@@ -14,16 +14,13 @@ class ShowUserProfileController {
       user_id
     };
 
-    console.log("useCase", params);
+    try {
+      const user = this.showUserProfileUseCase.execute(params);
 
-
-    const user = this.showUserProfileUseCase.execute(params);
-
-    if (!user) {
-      return response.status(404).json({ error: true })
+      return response.status(200).json(user);
+    } catch (error) {
+      return response.status(404).json({ error });
     }
-
-    return response.status(200).json(user);
   }
 }
 
