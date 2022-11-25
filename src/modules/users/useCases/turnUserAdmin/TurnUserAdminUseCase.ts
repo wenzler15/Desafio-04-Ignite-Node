@@ -13,8 +13,8 @@ class TurnUserAdminUseCase {
     const user = this.usersRepository.findById(user_id);
 
     if (!user) {
-      throw Object.assign(new Error("User not found!"), { statusCode: 404 });
-    }
+      throw Object.assign(new Error("User not admin!"), { statusCode: 404 }, { data: { error: true } });
+    };
 
     return this.usersRepository.turnAdmin(user);
   }

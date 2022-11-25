@@ -14,11 +14,11 @@ class ListAllUsersUseCase {
     const user = this.usersRepository.findById(user_id);
 
     if (!user) {
-      throw Object.assign(new Error("User not found!"), { statusCode: 400 });
+      return null;
     }
 
     if (user.admin === false) {
-      throw Object.assign(new Error("User not admin!"), { statusCode: 400 });
+      throw Object.assign(new Error("User not admin!"), { statusCode: 400 }, { data: { error: true } });
     }
 
     const users = this.usersRepository.list();

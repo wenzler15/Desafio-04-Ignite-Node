@@ -13,8 +13,11 @@ class ShowUserProfileUseCase {
   execute({ user_id }: IRequest): User {
     const user = this.usersRepository.findById(user_id);
 
+    console.log("ola", user_id);
+
+
     if (!user) {
-      throw Object.assign(new Error("User not found!"), { statusCode: 404 });
+      return null;
     }
 
     return user;
